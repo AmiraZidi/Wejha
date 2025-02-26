@@ -1,0 +1,124 @@
+.contact {
+  position: relative;
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 60px !important;
+  border-radius: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-family: "Arial", sans-serif;
+  overflow: hidden; 
+}
+
+.contact::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://i.pinimg.com/736x/2d/6a/3c/2d6a3c1eb0d6eb9bf96d23e53947f43b.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: blur(2px);
+  z-index: -1; 
+}
+
+.contact h1 {
+  font-size: 56px;
+  font-weight: 600;
+  -webkit-text-stroke: 1px #f6f5f7;
+  color: transparent;
+  display: inline-block;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.contact p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  position: relative;
+  z-index: 1;
+}
+
+.form-row {
+  display: flex;
+  gap: 25px;
+  justify-content: space-between;
+}
+
+.form-row input,
+textarea {
+  width: 48%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 30px;
+  outline: none;
+  transition: border 0.3s ease-in-out;
+  box-sizing: border-box;
+}
+
+.form-row input:focus,
+textarea:focus {
+  border-color: #1d7151;
+  box-shadow: 0 0 5px rgba(29, 113, 81, 0.4);
+}
+
+textarea {
+  width: 100%;
+  height: 180px;
+  resize: vertical;
+}
+
+button {
+  padding: 15px 40px;
+  font-size: 18px;
+  background-color: transparent;
+  color: #f6f5f7;
+  border: 1px solid #f6f5f7;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-row input {
+    width: 100%;
+  }
+
+  .contact {
+    padding: 20px;
+  }
+
+  .contact h1 {
+    font-size: 28px;
+  }
+
+  button {
+    width: 100%;
+    font-size: 18px;
+  }
+}

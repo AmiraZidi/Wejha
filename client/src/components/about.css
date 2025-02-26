@@ -1,0 +1,47 @@
+.about-us {
+    font-family: Arial, sans-serif;
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .about-header h1 {
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .about-us section {
+    margin-bottom: 30px;
+  }
+  
+  .about-us h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #1d7151;
+  }
+  
+  .about-us p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  
+  .about-us ul,
+  .about-us ol {
+    padding-left: 20px;
+  }
+  
+  .about-us li {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  
+  .about-us a {
+    color: #1d7151;
+    text-decoration: none;
+  }
+  
+  .about-us a:hover {
+    text-decoration: underline;
+  }
+  

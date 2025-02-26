@@ -1,0 +1,143 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f6f5f7 !important;
+}
+
+/* carousel */
+.firstsec {
+  width: 98% !important;
+  margin: 0 auto;
+  border-radius: 30px !important;
+  overflow: hidden;
+}
+
+.firstsec .carousel {
+  width: 100% !important;
+}
+
+.firstsec .carousel-item img {
+  border-radius: 30px;
+  width: 100% !important;
+  object-fit: cover;
+}
+
+.carousel-item {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+}
+
+.carousel-caption {
+  width: 35% !important;
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column;
+  height: 80%;
+}
+
+.carousel-title {
+  text-align: left;
+  font-weight: 900;
+  font-size: 80px;
+  font-size: 3rem;
+  -webkit-text-stroke: 2px #f6f5f7;
+  color: transparent;
+  display: inline-block;
+}
+
+.carousel-description {
+  text-align: justify;
+  font-size: 20px;
+}
+
+.carousel-cta {
+  border: 1px solid #f6f5f7;
+  color: #f6f5f7;
+  background-color: transparent;
+}
+
+.carousel-cta:hover {
+  border: 1px solid #f6f5f7;
+  color: #f6f5f7;
+  background-color: transparent;
+}
+
+/* limadhaaaaa */
+.whysec {
+  text-align: center !important;
+  padding: 40px !important;
+}
+
+.why-header h1 {
+  font-size: 36px !important;
+  color: #0037aa !important;
+  margin-bottom: 30px !important;
+}
+
+.why-main {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: space-between !important;
+  flex-direction: row !important;
+  gap: 20px !important;
+}
+
+.Why-card {
+  background-color: #f9f9f9 !important;
+  padding: 20px !important;
+  width: 22% !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+  text-align: center !important;
+  border: 1px solid #ddd !important;
+}
+
+.Why-card h3 {
+  font-size: 24px !important;
+  color: #333 !important;
+  margin-bottom: 10px !important;
+}
+
+.Why-card p {
+  font-size: 16px !important;
+  color: #666 !important;
+}
+
+.why-main .Why-card:not(:last-child) {
+  border-right: 2px solid #ddd !important;
+}
+
+/* how section */
+
+.howsec {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../../public/How.png");
+  background-repeat: no-repeat;
+  margin-top: 20px;
+  background-position: center;
+  background-size: cover;
+  height: 105vh;
+}
+
+.howtitle {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  height: 100%;
+  padding-top: 50px;
+}
+
+.howtitle h1 {
+  font-size: 50px;
+  color: black;
+}
+
+
+
