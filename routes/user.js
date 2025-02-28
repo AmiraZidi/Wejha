@@ -79,10 +79,21 @@ userRouter.get("/current", isAuth(), (req, res) => {
 
 // get all users
 
-userRouter.get("/get", async (req, res) => {
+userRouter.get("/", async (req, res) => {
   try {
     let result = await User.find();
-    res.send({ Users: result, msg: "all Users" });
+    res.send({ users: result, msg: "all Users" });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+//delete user
+
+userRouter.delete("/:id", async (req, res) => {
+  try {
+    let result = await User.findByIdAndDelete(req.params.id);
+    res.send({ msg: "user is deleted" });
   } catch (error) {
     console.log(error);
   }

@@ -365,7 +365,7 @@ table tr:hover {
   }
 }
 
-.program-title{
+.program-title {
   color: #edd947 !important;
   font-size: 40px !important;
   display: flex !important;
@@ -375,78 +375,156 @@ table tr:hover {
   font-weight: 900 !important;
 }
 
-.planeicon{
+.planeicon {
   width: 20%;
 }
 
-.agencies-list{
+.agencies-list {
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
 }
-
-
+/* Global Styling */
 section {
   padding-top: 4rem;
-  width: 93%;
+  width: 90%;
   margin: auto;
+  max-width: 800px;
 }
 
+/* Animation pour l'ouverture des détails */
 details[open] summary ~ * {
-  animation: open 0.3s ease-in-out;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
-@keyframes open {
+@keyframes fadeIn {
   0% {
     opacity: 0;
+    transform: translateY(-10px);
   }
   100% {
     opacity: 1;
+    transform: translateY(0);
   }
 }
+
+/* Custom Styling for Details */
+details {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease-in-out;
+  width: 90%;
+}
+
+details:hover {
+  background-color: #f1f1f1;
+}
+
 details summary::-webkit-details-marker {
   display: none;
 }
 
 details summary {
   width: 100%;
-  padding: 0.5rem 0;
-  border-top: 1px solid black;
-  position: relative;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
   cursor: pointer;
-  font-size: 1.25rem;
-  font-weight: 300;
-  list-style: none;
+  font-size: 1.1rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
 }
 
-details summary:after {
+details summary::after {
   content: "+";
-  color: black;
-  position: absolute;
-  font-size: 1.75rem;
-  line-height: 0;
-  margin-top: 0.75rem;
-  right: 0;
-  font-weight: 200;
-  transform-origin: center;
-  transition: 200ms linear;
+  font-size: 1.5rem;
+  font-weight: bold;
+  transition: transform 0.2s ease;
 }
-details[open] summary:after {
+
+details[open] summary::after {
   transform: rotate(45deg);
-  font-size: 2rem;
 }
-details summary {
-  outline: 0;
-}
+
+/* Paragraph inside details */
 details p {
-  font-size: 0.95rem;
-  margin: 0 0 1rem;
-  padding-top: 1rem;
+  font-size: 1rem;
+  margin: 10px 0 0;
+  padding-top: 8px;
+  color: #555;
 }
 
+/* Custom Radio Button Styling */
+.form-check-input {
+  margin-right: 10px;
+  cursor: pointer;
+  transform: scale(1.2);
+}
 
-.progs{
-  border-radius: 30px !important;
-  width: 100% !important;
+.form-check-label {
+  font-size: 1rem;
+  color: #333;
+}
+
+/* General Layout */
+.progs {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: transparent;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.con {
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  max-width: 600px;
+  text-align: center;
+}
+
+/* Improved Button Style */
+.votebtn {
+  background: linear-gradient(135deg, #5a37c1, #7a5ce0);
+  border: none;
+  color: white;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: block;
+  margin: 15px auto;
+}
+
+.votebtn:hover {
+  background: linear-gradient(135deg, #7a5ce0, #5a37c1);
+  transform: scale(1.05);
+}
+
+.votebtn:active {
+  transform: scale(0.98);
+}
+
+.challenge-option {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.sondage {
+  margin-top: 40px;
 }

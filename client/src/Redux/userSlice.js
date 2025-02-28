@@ -82,12 +82,32 @@ export const editUser = createAsyncThunk(
   }
 );
 
+// ✅ get all users
+export const getuser = createAsyncThunk("user/get", async () => {
+  try {
+    const response = await axios.get("http://localhost:5000/user/");
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+export const deleteuser = createAsyncThunk("user/delete", async (id) => {
+  try {
+    let result = axios.delete(`http://localhost:5000/user/${id}`);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 // Initial state
 const initialState = {
   user: null,
   status: null,
   error: null,
   message: null,
+  userList: [],
 };
 
 // ✅ Redux Slice
@@ -174,6 +194,35 @@ export const userSlice = createSlice({
         state.user = action.payload;
       })
       .addCase(editUser.rejected, (state, action) => {
+        state.status = "fail";
+        state.error = action.payload;
+      })
+
+      // get all users
+      .addCase(getuser.pending, (state) => {
+        state.status = "pending";
+        state.error = null;
+      })
+      .addCase(getuser.fulfilled, (state, action) => {
+        state.status = "success";
+        state.userList = action.payload.data?.users || [];
+      })
+      .addCase(getuser.rejected, (state, action) => {
+        state.status = "fail";
+        state.userList = [];
+        state.error = action.payload;
+      })
+
+      // delete user
+      .addCase(deleteuser.pending, (state) => {
+        state.status = "pending";
+        state.error = null;
+      })
+      .addCase(deleteuser.fulfilled, (state, action) => {
+        state.status = "success";
+        state.userList = action.payload.data;
+      })
+      .addCase(deleteuser.rejected, (state, action) => {
         state.status = "fail";
         state.error = action.payload;
       });

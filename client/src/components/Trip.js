@@ -10,6 +10,9 @@ function Trip({ suggestion, ping, setping }) {
   const user = useSelector((state) => state.user.user);
   const suggestions = useSelector((state) => state.suggestion.suggestionList);
   const challenge = useSelector((state) => state.challenge.challengeList);
+  const suggest = suggestions.filter(
+    (el) => el.id_suggestion === suggestion?._id
+  );
   const participants = useSelector(
     (state) => state.participant.participantList
   );
@@ -36,23 +39,16 @@ function Trip({ suggestion, ping, setping }) {
 
   const suremodal = () => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      title: "This trip is closed!",
+      text: "Try with another one or share a new trip.",
       icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        dispatch(deletesuggestion(suggestion?._id));
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your Trip Suggestion has been deleted.",
-          icon: "success",
-        });
-        setping((prevPing) => !prevPing);
-      }
+    });
+  };
+  const minemodal = () => {
+    Swal.fire({
+      title: "This is your suggestion!",
+      text: "You can see more infos about it in your profile.",
+      icon: "info",
     });
   };
   const memberin = () => {
@@ -125,16 +121,21 @@ function Trip({ suggestion, ping, setping }) {
           {user?.category == "voyageur" ? (
             <button
               className={`participate ${
-                participants?.some((p) => p.id_suggestion === suggestion?._id)
+                participants?.some(
+                  (p) =>
+                    p.id_suggestion === suggestion?._id &&
+                    p.id_traveler === user._id
+                )
                   ? "member-btn"
                   : suggestion?.id_voyageur === user?._id
-                  ? "delete-btn"
+                  ? "mysugg"
                   : "participate-btn"
               }`}
               onClick={() => {
-                if (suggestion?.id_voyageur === user?._id) {
+                if (suggestion?.status === "Done") {
                   suremodal();
-                  setping((prevPing) => !prevPing);
+                } else if (suggestion?.id_voyageur === user?._id) {
+                  minemodal();
                 } else {
                   dispatch(addparticipant(newparticipant));
                   memberin();
@@ -142,10 +143,14 @@ function Trip({ suggestion, ping, setping }) {
                 setping((prevPing) => !prevPing);
               }}
             >
-              {participants?.some((p) => p.id_suggestion === suggestion?._id)
+              {participants?.some(
+                (p) =>
+                  p.id_suggestion === suggestion?._id &&
+                  p.id_traveler === user._id
+              )
                 ? "Member"
                 : suggestion?.id_voyageur === user?._id
-                ? "Delete"
+                ? "My Suggestion"
                 : "Participate"}
             </button>
           ) : user?.category == "agency" ? (

@@ -8,7 +8,7 @@
 
 body {
   background-color: #f6f5f7;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .trips-header {
@@ -173,8 +173,6 @@ body {
   color: #333;
 }
 
-
-
 .t-box.tour-box-list .tag {
   position: absolute;
   top: 15px;
@@ -269,7 +267,7 @@ body {
   color: #333;
 }
 
-.member-btn{
+.member-btn {
   padding: 10px 15px;
   font-size: 14px;
   font-weight: bold;
@@ -311,4 +309,33 @@ body {
 .participate-btn:hover {
   background: #0037aa;
   color: #f6f5f7;
+}
+
+.done-btn {
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: transparent;
+  border: 2px solid #aa0000;
+  color: #aa0000;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.done-btn:hover {
+  background: #aa0000;
+  color: #f6f5f7;
+}
+
+.mysugg{
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: transparent;
+  border: 2px solid #1d7151;
+  color: #1d7151;
+  border-radius: 30px;
+  transition: all 0.3s ease;
 }

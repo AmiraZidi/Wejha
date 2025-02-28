@@ -6,12 +6,11 @@ import Home from "./components/Home";
 import Profil from "./components/Profil";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { userCurrent } from "./Redux/userSlice";
+import { getuser, userCurrent } from "./Redux/userSlice";
 import PrivateRoute from "./Routes/PrivateRouter";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Contact from "./components/Contact";
 import About from "./components/About";
-import Footer from "./components/Footer";
 import Trips from "./components/Trips";
 import { getsuggestion } from "./Redux/suggestionSlice";
 import DashAdmin from "./components/DashAdmin";
@@ -23,6 +22,10 @@ import ProfilAgency from "./components/ProfilAgency";
 import ForgotPassword from "./components/ForgotPassword";
 import AddProgram from "./components/AddProgram";
 import Vote from "./components/Vote";
+import { getvote } from "./Redux/voteSlice";
+import GestionTrips from "./components/GestionTrips";
+import Travelers from "./components/Travelers";
+import Agency from "./components/Agency";
 
 function App() {
   const isAuth = localStorage.getItem("token");
@@ -33,6 +36,8 @@ function App() {
     dispatch(getsuggestion());
     dispatch(getparticipant());
     dispatch(getchallenge());
+    dispatch(getvote());
+    dispatch(getuser());
   }, [ping]);
   return (
     <div className="App">
@@ -51,7 +56,10 @@ function App() {
           element={<Trips ping={ping} setping={setping} />}
         />
         <Route path="/trip/:id" element={<SingleTrip />} />
-        <Route path="/tripvote/:id" element={<Vote />} />
+        <Route
+          path="/tripvote/:id"
+          element={<Vote ping={ping} setping={setping} />}
+        />
         <Route path="/add" element={<Add ping={ping} setping={setping} />} />
         <Route element={<PrivateRoute />}>
           <Route
@@ -63,6 +71,18 @@ function App() {
             element={<ProfilAgency ping={ping} setping={setping} />}
           />
           <Route path="/dash" element={<DashAdmin />} />
+          <Route
+            path="/gestiontrips"
+            element={<GestionTrips ping={ping} setping={setping} />}
+          />
+          <Route
+            path="/travelerslist"
+            element={<Travelers ping={ping} setping={setping} />}
+          />
+          <Route
+            path="/agencieslist"
+            element={<Agency ping={ping} setping={setping} />}
+          />
         </Route>
       </Routes>
     </div>

@@ -3,6 +3,7 @@ import userSlice from "./userSlice";
 import suggestionSlice from "./suggestionSlice";
 import participantSlice from "./participantSlice";
 import challengeSlice from "./challengeSlice";
+import voteSlice from "./voteSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
     suggestion: suggestionSlice,
     participant: participantSlice,
     challenge: challengeSlice,
+    vote: voteSlice,
   },
 });

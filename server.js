@@ -12,6 +12,7 @@ app.use("/suggestion", require("./routes/suggestion"));
 app.use("/participant", require("./routes/participant"));
 app.use("/challenge", require("./routes/challenge"));
 app.use("/user", require("./routes/user"));
+app.use("/vote", require("./routes/vote"));
 
 app.listen(process.env.PORT, (err) =>
   err ? console.log(err) : console.log("server is running")

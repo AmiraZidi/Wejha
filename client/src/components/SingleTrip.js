@@ -3,23 +3,43 @@ import Navbarr from "./Navbarr";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Footer from "./Footer";
+import ProgressBar from "react-bootstrap/ProgressBar";
 
 function SingleTrip() {
   const suggestions = useSelector((state) => state.suggestion.suggestionList);
   const challenge = useSelector((state) => state.challenge.challengeList);
+  const votes = useSelector((state) => state.vote.voteList);
   const params = useParams();
   const [isOpen, setIsOpen] = useState(false);
-  const trip = challenge.filter((el) => el._id == params.id)[0];
-
-  const suggest = suggestions.find((el) => el.Title === trip.title_suggestion);
   const [openIndex, setOpenIndex] = useState(null);
   const toggleSection = (el) => {
     setOpenIndex(openIndex === el ? null : el);
   };
 
+  const trip = challenge.find((el) => el._id.toString() === params.id);
   if (!trip) {
-    return <p>Trip not found</p>;
+    return <p>Trip not found</p>;
   }
+
+  const suggest = suggestions.find((el) => el.Title === trip.title_suggestion);
+  if (!suggest) {
+    return <p>Suggestion not found</p>;
+  }
+
+  const allchallenge = challenge.filter(
+    (el) => el.id_suggestion === suggest._id
+  );
+  const sondage = votes.filter((el) => el?.id_suggestion === suggest._id);
+
+  // Comptage des votes par agence
+  const voteCounts = sondage.reduce((acc, vote) => {
+    if (vote?.id_agency) {
+      acc[vote.id_agency] = (acc[vote.id_agency] || 0) + 1;
+    }
+    return acc;
+  }, {});
+
+  const totalVotes = sondage.length;
 
   return (
     <>
@@ -105,22 +125,80 @@ function SingleTrip() {
         </div>
       </div>
 
-      <div className="container p-6 progs" >
-        <div className="bg-white rounded-lg overflow-hidden p-6 col">
+      <div className="progs">
+        <div className="con">
+          <h1 className="sondage">Vote Result</h1>
 
-          <section>
-            <h1>Agencies &amp; Programs</h1>
-            {challenge
-              ?.filter((el) => el?.id_suggestion === suggest?._id)
-              .map((el) => (
-            <details>
-              <summary>{el?.name_agency}</summary>
-              <p>
-              {el?.Program}
-              </p>
-            </details>
-            ))}
-          </section>
+          {suggest?.status === "Pending"
+            ? allchallenge.map((el) => {
+                const agencyVotes = voteCounts[el._id] || 0;
+                const percentage =
+                  totalVotes > 0 ? (agencyVotes / totalVotes) * 100 : 0;
+
+                return (
+                  <div key={el._id}>
+                    <h2>{el.name_agency || "Agence inconnue"}</h2>
+                    <ProgressBar
+                      animated
+                      now={percentage}
+                      label={`${percentage.toFixed(1)}%`}
+                      variant="warning"
+                    />
+                    <p>{agencyVotes} vote(s)</p>
+                  </div>
+                );
+              })
+            : (() => {
+                const maxVotedAgency = allchallenge.reduce(
+                  (max, el) => {
+                    const agencyVotes = voteCounts[el._id] || 0;
+                    return agencyVotes > max.votes
+                      ? { agency: el, votes: agencyVotes }
+                      : max;
+                  },
+                  { agency: null, votes: 0 }
+                );
+
+                if (!maxVotedAgency.agency) return <h2>No votes yet.</h2>;
+
+                const percentage =
+                  totalVotes > 0
+                    ? (maxVotedAgency.votes / totalVotes) * 100
+                    : 0;
+
+                return (
+                  <div key={maxVotedAgency.agency._id}>
+                    <h2>
+                      The Winner is:{" "}
+                      {maxVotedAgency.agency.name_agency || "Agence inconnue"}
+                    </h2>
+                    <ProgressBar
+                      animated
+                      now={percentage}
+                      label={`${percentage.toFixed(1)}%`}
+                      variant="warning"
+                    />
+                    <p>{maxVotedAgency.votes} vote(s)</p>
+                  </div>
+                );
+              })()}
+        </div>
+        <div className="con">
+          <div className="bg-white rounded-lg overflow-hidden p-6 col">
+            <section>
+              <div>
+                <h1>Agencies &amp; Programs</h1>
+              </div>
+              {challenge
+                ?.filter((el) => el?.id_suggestion === suggest?._id)
+                .map((el) => (
+                  <details key={el._id}>
+                    <summary>{el?.name_agency}</summary>
+                    <p>{el?.Program}</p>
+                  </details>
+                ))}
+            </section>
+          </div>
         </div>
       </div>
 
